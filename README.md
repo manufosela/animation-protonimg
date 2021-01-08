@@ -1,4 +1,4 @@
-# animation-protonimg
+# animation-protonimg [![NPM version][npm-image]][npm-url]
 
 Lit-Element web component to show images with [proton.js](https://github.com/drawcall/Proton) library
 
