@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <title>animation-protonimg demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script type="module" src="../animation-protonimg.js"></script>
+    <style>
+      .blocks {
+        display:flex;
+        flex-direction:row;
+        flex-wrap: wrap;
+      }
+      .block {
+        display:flex;
+        flex-direction:column;
+        flex-wrap: wrap;
+        white-space: normal;
+      }
+      .code {
+        padding: 20px;
+        color:#FFF; 
+        background: #000;
+      }
+      .attributes {
+        padding-left: 20px;
+      }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic animation-protonimg Demo</h3>
+      <a href="https://github.com/manufosela/animation-protonimg">github</a>
+      <a href="https://www.npmjs.com/package/animation-protonimg">NPM</a>
+      <div class="blocks">
+        <pre class="block code">
+          <code>
+            &lt;animation-protonimg&gt;<br>
+            width="900"<br>
+            height="300"<br>
+            time="5"<br>
+            background="#000"&gt;<br>
+            &lt;img src="img/animation-protonimg-demo1.png" /&gt;<br>
+            &lt;img src="img/animation-protonimg-demo2.png" /&gt;<br>
+            &lt;/animation-protonimg&gt;
+          </code>
+        </pre>
+        <pre class="block attributes">
+          <h3>Attributes</h3>
+          <ul>
+            <li>time (String) [0] (it can be 'mouse' or a number of seconds</li>
+            <li>width (Number) [800]</li>
+            <li>height (Number) [400]</li>
+            <li>background (String) [#000]</li>
+          </ul>
+          <h3>Events</h3>
+          <ul>
+            <li>animation-protonimg_change-image</li>
+            <li>animation-protonimg_change-image-without-reset</li>
+          </ul>
+        </pre>
+      </div>
+      
+      <header>
+        <button id="changeBtn1">Change image</button> <button id="changeBtn2">Change image without reset</button>
+        <animation-protonimg height="300" width="900" time="0" background="#000">
+          <img src="img/animation-protonimg-demo.png" />
+          <img src="img/animation-protonimg-demo1.png" />
+          <img src="img/animation-protonimg-demo2.png" />  
+          <img src="img/logo3c.png" />
+          <img src="img/logo1c.png" />
+        </animation-protonimg>
+      </header>
+
+      <script>
+        window.onload = function() {
+          document.getElementById('changeBtn2').addEventListener('click', () => {
+            const animationProtonimg_ChangeImage = new CustomEvent('animation-protonimg_change-image-without-reset');
+            document.dispatchEvent(animationProtonimg_ChangeImage, {});
+          });
+          document.getElementById('changeBtn1').addEventListener('click', () => {
+            const animationProtonimg_ChangeImageWithoutReset = new CustomEvent('animation-protonimg_change-image');
+            document.dispatchEvent(animationProtonimg_ChangeImageWithoutReset, {});
+          });
+        }
+      </script>
+    </div>
+  </body>
+</html>
