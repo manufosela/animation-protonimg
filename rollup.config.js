@@ -4,9 +4,9 @@ import { terser } from 'rollup-plugin-terser';
 
 export default {
   preserveSymlinks: true,
-	input: ['scene-protonimg.js'],
+	input: ['animation-protonimg.js'],
 	output: {
-		file: 'dist/scene-protonimg.js',
+		file: 'dist/animation-protonimg.js',
     format: 'es',
     sourcemap: true
   },

@@ -1,7 +1,7 @@
 {
   "name": "animation-protonimg",
   "description": "Lit-Element webcomponent animation proton images",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "animation-protonimg.js",
   "repository": {
     "type": "git",
