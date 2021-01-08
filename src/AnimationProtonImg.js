@@ -45,9 +45,33 @@ export class AnimationProtonImg extends LitElement {
 
     this.imgCounter = 0;
     this.reset = true;
+  }
 
-    document.addEventListener('animation-protonimg_change-image-without-reset', this.nextImage.bind(this));
-    document.addEventListener('animation-protonimg_change-image', this.changeImage.bind(this));
+  _changeImageWithoutResetDispatched(ev) {
+    console.log('2', ev.detail.id, this.id);
+    if (ev.detail.id === this.id) {
+      this.nextImage();
+    }
+  }
+
+  _changeImageDispatched(ev) {
+    console.log('1', ev.detail.id, this.id);
+    if (ev.detail.id === this.id) {
+      this.changeImage();
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    document.addEventListener('animation-protonimg_change-image-without-reset', this._changeImageWithoutResetDispatched.bind(this));
+    document.addEventListener('animation-protonimg_change-image', this._changeImageDispatched.bind(this));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    document.aremoveEventListener('animation-protonimg_change-image-without-reset', this._changeImageWithoutResetDispatched.bind(this));
+    document.removeEventListener('animation-protonimg_change-image', this._changeImageDispatched.bind(this));
+
   }
 
   firstUpdated() {
@@ -183,7 +207,19 @@ export class AnimationProtonImg extends LitElement {
     }
   }
 
-  tick() {
+  timestampControl(timestamp) {
+    if (!this.start) {
+      this.start = timestamp;
+    };
+    const progress = timestamp - this.start;
+    if (progress > 10000) {
+      // RESET TIMESTAMP TO AVOID ANIMATION SLODOWN
+      this.start = timestamp;
+    }
+  }
+
+  tick(timestamp) {
+    this.timestampControl(timestamp);
     requestAnimationFrame(this.tick.bind(this));
     this.proton.update();
   }
