@@ -5,51 +5,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
     <script type="module" src="../animation-protonimg.js"></script>
-    <style>
-      .blocks {
-        display:flex;
-        flex-direction:row;
-        flex-wrap: wrap;
-      }
-      .block {
-        display:flex;
-        flex-direction:column;
-        flex-wrap: wrap;
-        white-space: normal;
-      }
-      .code {
-        padding: 20px;
-        color:#FFF; 
-        background: #000;
-      }
-      .attributes {
-        padding-left: 20px;
-      }
-      header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
-    </style>
+    <link rel="stylesheet" href="css/styles.css" crossorigin="anonymous" />
   </head>
 
   <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic animation-protonimg Demo</h3>
-      <a href="https://github.com/manufosela/animation-protonimg">github</a>
-      <a href="https://www.npmjs.com/package/animation-protonimg">NPM</a>
-      <div class="blocks">
+    <div class="container">
+      <header>
+        <h1>Basic animation-protonimg Demo</h1>
+        <nav>
+          <a href="https://github.com/manufosela/animation-protonimg" title="github public repository">
+            <img src="https://img.shields.io/badge/github-repository-green" alt="github" />
+          </a>
+          <a href="https://www.npmjs.com/package/animation-protonimg" title="npm package animation-protonimg">
+            <img src="https://img.shields.io/badge/npmjs-package-red" alt="npm-package" />
+          </a>
+        </nav>
+      </header>
+      <aside class="blocks">
         <pre class="block code">
+          <h3>Example</h3>
           <code>
-            &lt;animation-protonimg&gt;<br>
-            width="900"<br>
-            height="300"<br>
-            time="5"<br>
-            background="#000"&gt;<br>
-            &lt;img src="img/animation-protonimg-demo1.png" /&gt;<br>
-            &lt;img src="img/animation-protonimg-demo2.png" /&gt;<br>
-            &lt;/animation-protonimg&gt;
+            &lt;<span class="wc">animation-protonimg</span><br>
+            &nbsp;&nbsp;width="900"<br>
+            &nbsp;&nbsp;height="300"<br>
+            &nbsp;&nbsp;time="5"<br>
+            &nbsp;&nbsp;background="#000"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="img/animation-protonimg-demo1.png" /&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="img/animation-protonimg-demo2.png" /&gt;<br>
+            &lt;/<span class="wc">animation-protonimg</span>&gt;
           </code>
         </pre>
         <pre class="block attributes">
@@ -65,32 +48,69 @@
             <li>animation-protonimg_change-image</li>
             <li>animation-protonimg_change-image-without-reset</li>
           </ul>
+          <p class="note">
+            NOTE: Send element id into 
+            detail CustomEvent
+          </p>
         </pre>
-      </div>
+      </aside>
       
-      <header>
-        <button id="changeBtn1">Change image</button> <button id="changeBtn2">Change image without reset</button>
-        <animation-protonimg height="300" width="900" time="0" background="#000">
-          <img src="img/animation-protonimg-demo.png" />
-          <img src="img/animation-protonimg-demo1.png" />
-          <img src="img/animation-protonimg-demo2.png" />  
-          <img src="img/logo3c.png" />
-          <img src="img/logo1c.png" />
-        </animation-protonimg>
-      </header>
+      <main>
+        <div id="example1" class="block">
+          <fieldset>
+            <div>
+              <h3>Example 1</h3>
+              <p>Click buttons to dispatch events to change image</p>
+            </div>
+            <button id="changeBtn1" class="pure-button button-secondary">Change image</button> 
+            <button id="changeBtn2" class="pure-button button-secondary">Change image without reset</button>
+          </fieldset>
+          <animation-protonimg id="wc1" height="300" width="900" time="0" background="#000">
+            <img src="img/animation-protonimg-demo1.png" />
+            <img src="img/animation-protonimg-demo2.png" />  
+          </animation-protonimg>
+        </div>
+        <div id="example2" class="block">
+          <fieldset>
+            <div>
+              <h3>Example 2</h3>
+              <p>Change images every 10 seconds</p>
+            </div>
+          </fieldset>
+          <animation-protonimg id="wc2" height="300" width="900" time="10" background="rgba(255,255,0,0.3)">
+            <img src="img/animation-protonimg-demo.png" />
+            <img src="img/logo3c.png" />
+            <img src="img/logo1c.png" />
+          </animation-protonimg>
+        </div>
+        <div id="example3" class="block">
+          <fieldset>
+            <div>
+              <h3>Example 3</h3>
+              <p>Change images when click image</p>
+            </div>
+          </fieldset>
+          <animation-protonimg id="wc3" height="200" width="800" time="mouse" background="cyan">
+            <img src="img/animation-protonimg-demo1.png" />
+            <img src="img/logo1c.png" />
+          </animation-protonimg>
+        </div>
+      </main>
 
-      <script>
-        window.onload = function() {
-          document.getElementById('changeBtn2').addEventListener('click', () => {
-            const animationProtonimg_ChangeImage = new CustomEvent('animation-protonimg_change-image-without-reset');
-            document.dispatchEvent(animationProtonimg_ChangeImage, {});
-          });
-          document.getElementById('changeBtn1').addEventListener('click', () => {
-            const animationProtonimg_ChangeImageWithoutReset = new CustomEvent('animation-protonimg_change-image');
-            document.dispatchEvent(animationProtonimg_ChangeImageWithoutReset, {});
-          });
-        }
-      </script>
+      <footer>developed by <b>@manufosela</</footer>
     </div>
+
+    <script>
+      window.onload = function() {
+        document.getElementById('changeBtn2').addEventListener('click', (ev) => {
+          const animationProtonimg_ChangeImage = new CustomEvent('animation-protonimg_change-image-without-reset', {detail:{id:'wc1'}});
+          document.dispatchEvent(animationProtonimg_ChangeImage);
+        });
+        document.getElementById('changeBtn1').addEventListener('click', (ev) => {
+          const animationProtonimg_ChangeImageWithoutReset = new CustomEvent('animation-protonimg_change-image', {detail:{id:'wc1'}});
+          document.dispatchEvent(animationProtonimg_ChangeImageWithoutReset);
+        });
+      }
+    </script>
   </body>
 </html>
