@@ -1,5 +1,6 @@
-# animation-protonimg [![npm-package](https://img.shields.io/badge/npmjs-package-red)](https://www.npmjs.com/package/animation-protonimg)
+# animation-protonimg [![npm-package](https://img.shields.io/badge/npmjs-package-red)](https://www.npmjs.com/package/animation-protonimg) [![github](https://img.shields.io/badge/github-repository-green)](https://github.com/manu/animation-protonimg) [![codepen-example](https://img.shields.io/badge/npmjs-package-black)](https://codepen.io/manufosela/pen/ZEpjzOP)
 
+https://codepen.io/manufosela/pen/ZEpjzOP
 Lit-Element web component to show images with [proton.js](https://github.com/drawcall/Proton) library
 
 ## Demo
