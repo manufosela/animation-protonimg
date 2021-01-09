@@ -2,7 +2,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
 import { terser } from 'rollup-plugin-terser';
-import replaceHtmlVars from 'rollup-plugin-replace-html-vars';
 
 export default {
   preserveSymlinks: true,
@@ -33,12 +32,8 @@ export default {
       },{
         src: './demo/index.html',
         dest: './dist',
+        transform: (contents) => contents.toString().replace('<script type="module" src="..', '<script type="module" src="js')
       }],
-    }),
-    replaceHtmlVars({
-      files: './demo/index.html',
-      from: '<script type="module" src="..',
-      to: '<script type="module" src="js',
     }),
   ],
 };
